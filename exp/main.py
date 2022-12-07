@@ -150,66 +150,99 @@ from PIL import Image, ImageFilter
 image = Image.open('pc.jpg')
 print(f"Original size : {image.size}") # 5464x3640
 
-####Image Resize
-sunset_resized = image.resize((300, 300))
-sunset_resized.save("sunset-aspect_size.jpeg")
+option=input("Enter name of function")
+if option=="Pixel":
+    print("Pixel")
+elif option=="Inch":
+    print("Inch")
+elif option=="Centi":
+    print("Centimeter")
+
+def Pixel(height,width):
+    sunset_resized = image.resize((height, width))
+    pixel=sunset_resized.save("sunset-aspect_size500.jpeg")
+    return pixel
+height = int(input("Enter height"))
+width = int(input("Enter width"))
+Pixel(height,width)
+
+def Inch(toinch1,toinch2):
+    cal1=float(toinch1*96)
+    cal2=float(toinch2*96)
+    sunset_resized = image.resize((int(cal1),int(cal2)))
+    sunset_resized.save("sunset-aspect_inch.jpeg")
+    return cal1,cal2
+toinch1=float(input("enter Height: "))
+toinch2=float(input("enter Width"))
+Inch(toinch1,toinch2)
+
+def Centi(centi1,centi2):
+    total1=float(centi1/96)*2.54
+    total2=float(centi2/96)*2.54
+    sunset_resized = image.resize((int(total1), int(total2)))
+    sunset_resized.save("sunset-aspect_centi.jpeg")
+    return total1,total2
+centi1=float(input("Enter Height"))
+centi2=float(input("Enter Height"))
+Centi(centi1,centi2)
+
 
 ####---------------------image Thumbnill
-image.thumbnail((400, 400))
-image.save("sunset-aspect.jpeg")
+# image.thumbnail((400, 400))
+# image.save("sunset-aspect_dipi300.jpeg", dpi=(300.0, 300.0))
+# image.save("sunset-aspect_dpuser.jpeg", dpc=(x, y))
 
 ####--------------------image Crop
 # Crop the image
-box = (300, 300, 700, 900)
-cropped_image = image.crop(box)
-cropped_image.save('cropped-image.jpg')
+# box = (300, 300, 700, 900)
+# cropped_image = image.crop(box)
+# cropped_image.save('cropped-image.jpg')
 
 # -------------------400x600 size of the image
-print(cropped_image.size)
-
+# print(cropped_image.size)
 
 ####-----------------------Jpg to png
-im1 = Image.open(r'sunset_400.jpeg')
-im1.save(r'covert.png')
+# im1 = Image.open(r'sunset_400.jpeg')
+# im1.save(r'covert.png')
 
 
 ####------------------Jpg to png
-im1 = Image.open(r'covert.png')
-im1.save(r'covertpng.jpg')
+# im1 = Image.open(r'covert.png')
+# im1.save(r'covertpng.jpg')
 
 
 ####--------------------webp extension
-im1 = Image.open(r'sunset-aspect.jpeg').convert("RGB")
-im1.save('covertwebp.webp', "webp")
+# im1 = Image.open(r'sunset-aspect.jpeg').convert("RGB")
+# im1.save('covertwebp.webp', "webp")
 
 ####--------------------------Crop image
-cropped_img = image.crop((300, 150, 700, 1000))
-print(cropped_img.size)
-cropped_img.show()
-low_res_img = cropped_img.resize(
-    (cropped_img.width // 4, cropped_img.height // 4))
-low_res_img.show()
+# cropped_img = image.crop((300, 150, 700, 1000))
+# print(cropped_img.size)
+# cropped_img.show()
+# low_res_img = cropped_img.resize(
+#     (cropped_img.width // 4, cropped_img.height // 4))
+# low_res_img.show()
 
 ####---------------------------Grayscale image
-filename = "pc.jpg"
-with Image.open(filename) as img:
-    img.load()
-
-cmyk_img = img.convert("CMYK")
-cmyk_img.show()
-gray_img = img.convert("L")  # Grayscale
-gray_img.show()
+# filename = "pc.jpg"
+# with Image.open(filename) as img:
+#     img.load()
+#
+# cmyk_img = img.convert("CMYK")
+# cmyk_img.show()
+# gray_img = img.convert("L")  # Grayscale
+# gray_img.show()
 
 
 ####--------------------------Convert Blur image
-im1 = image.filter(ImageFilter.BoxBlur(4))
+# im1 = image.filter(ImageFilter.BoxBlur(4))
 # Shows the image in image viewer
-im1.show()
+# im1.show()
 
 ####------------------transparency
-image = Image.open('pc.jpg')
-image.putalpha(128)
-image.save('pillow_putalpha_solid.png')
+# image = Image.open('pc.jpg')
+# image.putalpha(128)
+# image.save('pillow_putalpha_solid.png')
 
 
 
@@ -224,55 +257,55 @@ from PIL import Image
 from tkinter import messagebox
 
 # create TK object
-root = Tk()
+# root = Tk()
 
 # naming the GUI interface to image_conversion_APP
-root.title("Image_Conversion_App")
+# root.title("Image_Conversion_App")
 
 ####------------------------Merging
 # importing Image class from PIL package
 from PIL import Image
 
 # creating a object
-image = Image.open(r"pc.jpg")
-image.load()
+# image = Image.open(r"pc.jpg")
+# image.load()
 
 # Splitting the image into individual
 # bands
-r, g, b, = image.split()
+# r, g, b, = image.split()
 
 # merge function used
-im1 = Image.merge('RGB', (g, b, r))
-im1.show()
-
+# im1 = Image.merge('RGB', (g, b, r))
+# im1.show()
+#
 
 ####-------------------------Merging 2 or more images
-from PIL import Image
-
-img_01 = Image.open("screenshot.png")
-img_02 = Image.open("sunset_400.jpeg")
-img_03 = Image.open("covertpng.png")
-img_04 = Image.open("sunset-aspect_size.jpeg")
-
-img_01_size = img_01.size
-img_02_size = img_02.size
-img_03_size = img_02.size
-img_02_size = img_02.size
-
-print('img 1 size: ', img_01_size)
-print('img 2 size: ', img_02_size)
-print('img 3 size: ', img_03_size)
-print('img 4 size: ', img_03_size)
-
-new_im = Image.new('RGB', (2*img_01_size[0],2*img_01_size[1]), (250,250,250))
-
-new_im.paste(img_01, (0,0))
-new_im.paste(img_02, (img_01_size[0],0))
-new_im.paste(img_03, (0,img_01_size[1]))
-new_im.paste(img_04, (img_01_size[0],img_01_size[1]))
-
-new_im.save("merged_images.png", "PNG")
-new_im.show()
+# from PIL import Image
+#
+# img_01 = Image.open("screenshot.png")
+# img_02 = Image.open("sunset_400.jpeg")
+# img_03 = Image.open("covertpng.png")
+# img_04 = Image.open("sunset-aspect_size.jpeg")
+#
+# img_01_size = img_01.size
+# img_02_size = img_02.size
+# img_03_size = img_02.size
+# img_02_size = img_02.size
+#
+# print('img 1 size: ', img_01_size)
+# print('img 2 size: ', img_02_size)
+# print('img 3 size: ', img_03_size)
+# print('img 4 size: ', img_03_size)
+#
+# new_im = Image.new('RGB', (2*img_01_size[0],2*img_01_size[1]), (250,250,250))
+#
+# new_im.paste(img_01, (0,0))
+# new_im.paste(img_02, (img_01_size[0],0))
+# new_im.paste(img_03, (0,img_01_size[1]))
+# new_im.paste(img_04, (img_01_size[0],img_01_size[1]))
+#
+# new_im.save("merged_images.png", "PNG")
+# new_im.show()
 
 
 
